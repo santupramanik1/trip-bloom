@@ -1,0 +1,85 @@
+import { createClient } from '@supabase/supabase-js'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { supabaseAdmin } from './server'
+import { isAdminId, verifyAccessToken } from './adminAuth'
+
+export async function isAdminUser(userId: string): Promise<boolean> {
+  return isAdminId(supabaseAdmin, userId)
+}
+
+export async function signIn(email: string, password: string) {
+  const authClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } }
+  )
+
+  const { data, error } = await authClient.auth.signInWithPassword({ email, password })
+
+  if (error) {
+    return { success: false, error: error.message }
+  }
+
+  // isAdminUser runs on the pristine `supabaseAdmin`, so it reads `admin_users` as service_role.
+  if (data.user && !(await isAdminUser(data.user.id))) {
+    return { success: false, error: 'Invalid login credentials' }
+  }
+
+  if (data.session) {
+    const cookieStore = await cookies()
+
+    cookieStore.set('supabase-auth-token', data.session.access_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: data.session.expires_in,
+      path: '/',
+    })
+
+    cookieStore.set('supabase-refresh-token', data.session.refresh_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 7, // 7 days — this is what keeps the admin signed in
+      path: '/',
+    })
+  }
+
+  return { success: true, user: data.user }
+}
+
+export async function signOut() {
+  const cookieStore = await cookies()
+  cookieStore.delete('supabase-auth-token')
+  cookieStore.delete('supabase-refresh-token')
+
+  // Also sign out from Supabase
+  await supabaseAdmin.auth.signOut()
+
+  redirect('/admin/login')
+}
+
+export async function getSession(): Promise<{ id: string } | null> {
+  try {
+    const cookieStore = await cookies()
+    const token = cookieStore.get('supabase-auth-token')
+
+    if (!token) {
+      return null
+    }
+
+    // Verify the JWT locally (signature + expiry) — no auth-server round-trip.
+    const userId = await verifyAccessToken(supabaseAdmin, token.value)
+    return userId ? { id: userId } : null
+  } catch {
+    return null
+  }
+}
+
+export async function getAdminUser() {
+  const user = await getSession()
+  if (!user) return null
+
+  return (await isAdminUser(user.id)) ? user : null
+}

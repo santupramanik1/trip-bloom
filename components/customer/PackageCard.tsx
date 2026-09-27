@@ -1,0 +1,125 @@
+'use client';
+
+import { MapPin, Clock3, Star, Tent, Users } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { TravelPackage, Difficulty, formatPrice } from '@/lib/hooks/usePackageFilters';
+
+interface DifficultyBadgeProps {
+  difficulty: Difficulty;
+}
+
+export function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
+  const styles: Record<Difficulty, string> = {
+    Easy: 'bg-brand-lightest text-brand-darkest',
+    Moderate: 'bg-brand-light/70 text-brand-darkest',
+    Challenging: 'bg-brand-dark text-white',
+  };
+  return (
+    <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${styles[difficulty]}`}>{difficulty}</span>
+  );
+}
+
+interface PackageCardProps {
+  pkg: TravelPackage;
+}
+
+export function PackageCard({ pkg }: PackageCardProps) {
+  const category = pkg.categories[0];
+
+  return (
+    // `h-full` + column flex so every card in a grid or rail matches its tallest sibling
+    // instead of shrink-wrapping its own text.
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-light bg-[var(--background)] transition hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative h-44 w-full shrink-0 overflow-hidden">
+        <Image
+          src={pkg.image}
+          alt={pkg.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          className="object-cover transition duration-500 group-hover:scale-105"
+        />
+        <div className="overlay-brand-primary absolute inset-0" />
+        {pkg.isSoldOut && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/45">
+            <span className="rounded-full bg-white/95 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-rose-700">
+              Sold Out
+            </span>
+          </div>
+        )}
+        {pkg.difficulty && (
+          <div className="absolute left-3 top-3">
+            <DifficultyBadge difficulty={pkg.difficulty} />
+          </div>
+        )}
+        {/* Group departures advertise their size up front, not just on the detail page. */}
+        {pkg.groupSize && (
+          <div className="absolute right-3 top-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-darkest/95 px-3 py-1 text-xs font-semibold text-white shadow-lg ring-1 ring-white/25 backdrop-blur-sm">
+              <Users aria-hidden="true" className="h-3.5 w-3.5" />
+              {pkg.groupSize}
+            </span>
+          </div>
+        )}
+        {pkg.location && (
+          <div className="absolute bottom-3 left-3 flex items-center gap-1 text-xs font-medium text-white">
+            <MapPin className="h-3.5 w-3.5" />
+            {pkg.location}
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col p-4">
+        <div className="mb-1 flex items-start justify-between gap-2">
+          {/* Fixed two-line box: titles of different lengths must not shift the rows below. */}
+          <h3 className="line-clamp-2 min-h-[2.5rem] text-sm font-semibold leading-snug text-brand-darkest">
+            {pkg.name}
+          </h3>
+        </div>
+        <p className="mb-3 line-clamp-2 min-h-[2rem] text-xs text-brand-medium">{pkg.description}</p>
+
+        <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-brand-medium">
+          {pkg.durationDays > 0 && (
+            <span className="flex items-center gap-1">
+              <Clock3 className="h-3.5 w-3.5" />
+              {pkg.durationDays} days
+            </span>
+          )}
+          {pkg.rating > 0 && (
+            <span className="flex items-center gap-1">
+              <Star className="h-3.5 w-3.5 fill-current text-brand-dark" />
+              {pkg.rating.toFixed(1)}
+            </span>
+          )}
+          {category && (
+            <span className="flex items-center gap-1">
+              <Tent className="h-3.5 w-3.5" />
+              {category}
+            </span>
+          )}
+        </div>
+
+        {/* mt-auto pins the price/CTA row to the bottom of every card. */}
+        <div className="mt-auto flex items-center justify-between border-t border-brand-lightest pt-3">
+          <div>
+            {pkg.price > 0 ? (
+              <>
+                <span className="text-base font-bold text-brand-darkest">{formatPrice(pkg.price)}</span>
+                <span className="ml-1 text-xs text-brand-medium">/ person</span>
+              </>
+            ) : (
+              <span className="text-base font-bold text-brand-darkest">On request</span>
+            )}
+          </div>
+          <Link
+            href={`/packages/${pkg.slug}`}
+            className="rounded-full bg-gradient-to-r from-brand-forest to-brand-sage px-4 py-1.5 text-xs font-semibold text-white transition hover:shadow-md hover:scale-105"
+          >
+            View
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+

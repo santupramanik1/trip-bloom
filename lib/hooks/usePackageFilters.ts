@@ -1,0 +1,352 @@
+'use client';
+
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { getPublishedPackages } from '@/lib/api/public/packages';
+import {
+  mapPackage,
+  formatPrice,
+  type Difficulty,
+  type TravelPackage,
+  type RawListPackage,
+} from '@/lib/packageList';
+import { isPackageFlagKey, type PackageFlagKey } from '@/lib/packageFlags';
+import { getActiveCategories } from '../api/public/categories';
+
+/* ============================== Types ============================== */
+
+export { mapPackage, formatPrice };
+export type { Difficulty, TravelPackage, RawListPackage };
+
+export interface CategoryOption {
+  value: string;
+  label: string;
+}
+
+export interface Filters {
+  search: string;
+  categories: string[];
+  flags: PackageFlagKey[];
+  difficulty: Difficulty[];
+  priceMin: number;
+  priceMax: number;
+  duration: string; // key into DURATION_RANGES
+  sort: string; // key into SORT_OPTIONS
+}
+
+/* ============================ Constants ============================= */
+
+export const PRICE_FLOOR = 0;
+export const PRICE_CEIL = 500000;
+
+/** How many package cards to show per page on the listing. */
+export const PACKAGES_PER_PAGE = 12;
+
+export const DIFFICULTIES: Difficulty[] = ['Easy', 'Moderate', 'Challenging'];
+
+export const DURATION_RANGES: Record<string, { label: string; min: number; max: number }> = {
+  any: { label: 'Any', min: 0, max: Infinity },
+  '1-3': { label: '1-3 days', min: 1, max: 3 },
+  '4-7': { label: '4-7 days', min: 4, max: 7 },
+  '8+': { label: '8+ days', min: 8, max: Infinity },
+};
+
+export const SORT_OPTIONS: Record<string, { label: string; compare: (a: TravelPackage, b: TravelPackage) => number }> = {
+  'best-match': { 
+    label: 'Best Match', 
+    compare: (a, b) => {
+      if (a.isFeatured !== b.isFeatured) {
+        return a.isFeatured ? -1 : 1;
+      }
+      return b.createdAt - a.createdAt;
+    } 
+  },
+  'rating-desc': { 
+    label: 'Highest Rated', 
+    compare: (a, b) => {
+      if (b.rating !== a.rating) {
+        return b.rating - a.rating;
+      }
+      return b.createdAt - a.createdAt;
+    } 
+  },
+  'price-asc': { label: 'Price: Low to High', compare: (a, b) => a.price - b.price },
+  'price-desc': { label: 'Price: High to Low', compare: (a, b) => b.price - a.price },
+  'newest': { label: 'Newest First', compare: (a, b) => b.createdAt - a.createdAt },
+  'popular': { label: 'Most Popular', compare: (a, b) => b.popularity - a.popularity },
+};
+
+export const DEFAULT_FILTERS: Filters = {
+  search: '',
+  categories: [],
+  flags: [],
+  difficulty: [],
+  priceMin: PRICE_FLOOR,
+  priceMax: PRICE_CEIL,
+  duration: 'any',
+  sort: 'best-match',
+};
+
+/* ============================== Helpers ============================== */
+
+export function parseListParam(value: string | null): string[] {
+  if (!value) return [];
+  return value.split(',').filter(Boolean);
+}
+
+/** Parse a numeric URL param, clamping to [min, max] and falling back when invalid. */
+export function clampParam(value: string | null, fallback: number, min: number, max: number): number {
+  if (value === null || value === '') return fallback;
+  const parsed = Number(value);
+  if (Number.isNaN(parsed)) return fallback;
+  return Math.min(Math.max(parsed, min), max);
+}
+
+/** Keep a URL param only when it's a known key of `allowed`, else fall back. */
+export function sanitizeKey(value: string | null, allowed: Record<string, unknown>, fallback: string): string {
+  return value && Object.prototype.hasOwnProperty.call(allowed, value) ? value : fallback;
+}
+
+export function filtersToSearchParams(filters: Filters): URLSearchParams {
+  const params = new URLSearchParams();
+  if (filters.search) params.set('q', filters.search);
+  if (filters.categories.length) params.set('category', filters.categories.join(','));
+  if (filters.flags.length) params.set('flag', filters.flags.join(','));
+  if (filters.difficulty.length) params.set('difficulty', filters.difficulty.join(','));
+  if (filters.priceMin !== PRICE_FLOOR) params.set('price_min', String(filters.priceMin));
+  if (filters.priceMax !== PRICE_CEIL) params.set('price_max', String(filters.priceMax));
+  if (filters.duration !== 'any') params.set('duration', filters.duration);
+  if (filters.sort !== DEFAULT_FILTERS.sort) params.set('sort', filters.sort);
+  return params;
+}
+
+export function searchParamsToFilters(params: URLSearchParams): Filters {
+  return {
+    search: params.get('q') ?? '',
+    categories: parseListParam(params.get('category')),
+    // Unknown flag values are dropped rather than kept — a bad `?flag=` must not
+    // filter the listing down to nothing.
+    flags: parseListParam(params.get('flag')).filter(isPackageFlagKey),
+    difficulty: parseListParam(params.get('difficulty')) as Difficulty[],
+    priceMin: clampParam(params.get('price_min'), PRICE_FLOOR, PRICE_FLOOR, PRICE_CEIL),
+    priceMax: clampParam(params.get('price_max'), PRICE_CEIL, PRICE_FLOOR, PRICE_CEIL),
+    duration: sanitizeKey(params.get('duration'), DURATION_RANGES, 'any'),
+    sort: sanitizeKey(params.get('sort'), SORT_OPTIONS, DEFAULT_FILTERS.sort),
+  };
+}
+
+export function countActiveFilters(filters: Filters): number {
+  let count = 0;
+  if (filters.search) count += 1;
+  count += filters.categories.length;
+  count += filters.flags.length;
+  count += filters.difficulty.length;
+  if (filters.priceMin !== PRICE_FLOOR || filters.priceMax !== PRICE_CEIL) count += 1;
+  if (filters.duration !== 'any') count += 1;
+  return count;
+}
+
+/* =============================== Hook ================================ */
+
+export function useDebouncedValue<T>(value: T, delayMs: number): T {
+  const [debounced, setDebounced] = useState(value);
+  useEffect(() => {
+    const timeout = setTimeout(() => setDebounced(value), delayMs);
+    return () => clearTimeout(timeout);
+  }, [value, delayMs]);
+  return debounced;
+}
+
+export function usePackageFilters() {
+  const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [searchInput, setSearchInput] = useState('');
+  const [hydrated, setHydrated] = useState(false);
+
+  const debouncedSearch = useDebouncedValue(searchInput, 350);
+
+  // ---- Fetch real published packages ----
+  const { data, isPending, isError, refetch } = useQuery({
+    queryKey: ['packages', 'published', 'list'],
+    queryFn: () => getPublishedPackages(),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const packages = useMemo<TravelPackage[]>(
+    () => ((data ?? []) as RawListPackage[]).map(mapPackage),
+    [data],
+  );
+
+  // ---- Fetch categories from DB (independent of the package list) ----
+  const { data: dbCategoriesData, isError: categoriesError } = useQuery({
+    queryKey: ['categories', 'active', 'list'],
+    queryFn: getActiveCategories,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const availableCategories = useMemo<CategoryOption[]>(() => {
+    // On error or empty result we simply render no category checkboxes; packages are never blocked on this.
+    if (categoriesError || !dbCategoriesData) return [];
+    return dbCategoriesData.map((c) => ({
+      value: c.name,
+      label: c.name,
+    }));
+  }, [dbCategoriesData, categoriesError]);
+
+  const searchParams = useSearchParams();
+  const didHydrate = useRef(false);
+  useEffect(() => {
+    if (didHydrate.current) return;
+    didHydrate.current = true;
+    const initial = searchParamsToFilters(new URLSearchParams(searchParams.toString()));
+    setFilters(initial);
+    setSearchInput(initial.search);
+    setHydrated(true);
+    window.scrollTo(0, 0);
+  }, [searchParams]);
+
+  const activeFilters = useMemo<Filters>(
+    () => (hydrated ? { ...filters, search: debouncedSearch } : filters),
+    [filters, debouncedSearch, hydrated],
+  );
+
+  // ---- Sync filters -> URL (replace, no history spam) ----
+  useEffect(() => {
+    if (!hydrated || typeof window === 'undefined') return;
+    const params = filtersToSearchParams(activeFilters);
+    const query = params.toString();
+    const newUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
+    if (newUrl !== `${window.location.pathname}${window.location.search}`) {
+      window.history.replaceState(null, '', newUrl);
+    }
+  }, [activeFilters, hydrated]);
+
+  /* ------------------------------ Derived ------------------------------ */
+
+  const filteredPackages = useMemo(() => {
+    const range = DURATION_RANGES[activeFilters.duration] ?? DURATION_RANGES.any;
+    const query = activeFilters.search.trim().toLowerCase();
+
+    return packages.filter((pkg) => {
+      if (query) {
+        const haystack = `${pkg.name} ${pkg.description} ${pkg.location}`.toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      if (activeFilters.categories.length && !pkg.categories.some((c) => activeFilters.categories.includes(c))) return false;
+      // Flags are an OR, like categories: "Trending + Best Seller" means either badge.
+      if (activeFilters.flags.length && !pkg.flags.some((f) => activeFilters.flags.includes(f))) return false;
+      if (activeFilters.difficulty.length && (!pkg.difficulty || !activeFilters.difficulty.includes(pkg.difficulty))) return false;
+      // "On request" packages (price 0) have no real price — don't drop them on a price filter.
+      if (pkg.price > 0 && (pkg.price < activeFilters.priceMin || pkg.price > activeFilters.priceMax)) return false;
+      if (pkg.durationDays < range.min || pkg.durationDays > range.max) return false;
+      return true;
+    });
+  }, [packages, activeFilters]);
+
+  const sortedPackages = useMemo(() => {
+    const sorter = SORT_OPTIONS[activeFilters.sort] ?? SORT_OPTIONS['best-match'];
+    return [...filteredPackages].sort(sorter.compare);
+  }, [filteredPackages, activeFilters.sort]);
+
+  /* ------------------------------ Pagination ------------------------------ */
+
+  const [page, setPage] = useState(1);
+
+  // Snap back to page 1 whenever the filters or sort change (render-phase state
+  // sync — the pattern React recommends over an effect).
+  const filterSignature = JSON.stringify(activeFilters);
+  const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
+  if (filterSignature !== prevFilterSignature) {
+    setPrevFilterSignature(filterSignature);
+    setPage(1);
+  }
+
+  const totalPages = Math.max(1, Math.ceil(sortedPackages.length / PACKAGES_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const pagedPackages = useMemo(
+    () => sortedPackages.slice((currentPage - 1) * PACKAGES_PER_PAGE, currentPage * PACKAGES_PER_PAGE),
+    [sortedPackages, currentPage]
+  );
+
+  const activeFilterCount = countActiveFilters(activeFilters);
+
+  /* ------------------------------ Handlers ------------------------------ */
+
+  const toggleCategory = useCallback((value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      categories: prev.categories.includes(value)
+        ? prev.categories.filter((c) => c !== value)
+        : [...prev.categories, value],
+    }));
+  }, []);
+
+  const toggleFlag = useCallback((value: PackageFlagKey) => {
+    setFilters((prev) => ({
+      ...prev,
+      flags: prev.flags.includes(value)
+        ? prev.flags.filter((f) => f !== value)
+        : [...prev.flags, value],
+    }));
+  }, []);
+
+  const toggleDifficulty = useCallback((value: Difficulty) => {
+    setFilters((prev) => ({
+      ...prev,
+      difficulty: prev.difficulty.includes(value)
+        ? prev.difficulty.filter((d) => d !== value)
+        : [...prev.difficulty, value],
+    }));
+  }, []);
+
+  const setPriceMin = useCallback((value: number) => {
+    setFilters((prev) => ({ ...prev, priceMin: Math.min(value, prev.priceMax) }));
+  }, []);
+
+  const setPriceMax = useCallback((value: number) => {
+    setFilters((prev) => ({ ...prev, priceMax: Math.max(value, prev.priceMin) }));
+  }, []);
+
+  const setDuration = useCallback((value: string) => {
+    setFilters((prev) => ({ ...prev, duration: value }));
+  }, []);
+
+  const setSort = useCallback((value: string) => {
+    setFilters((prev) => ({ ...prev, sort: value }));
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    // Sort is not a filter (it isn't counted in countActiveFilters), so preserve the current selection.
+    setFilters((prev) => ({ ...DEFAULT_FILTERS, sort: prev.sort }));
+    setSearchInput('');
+  }, []);
+
+  return {
+    filters,
+    setFilters,
+    searchInput,
+    setSearchInput,
+    loading: isPending || !hydrated,
+    error: isError,
+    refetch,
+    hydrated,
+    sortedPackages,
+    pagedPackages,
+    resultCount: sortedPackages.length,
+    page: currentPage,
+    setPage,
+    totalPages,
+    pageSize: PACKAGES_PER_PAGE,
+    totalCount: packages.length,
+    availableCategories,
+    activeFilterCount,
+    toggleCategory,
+    toggleFlag,
+    toggleDifficulty,
+    setPriceMin,
+    setPriceMax,
+    setDuration,
+    setSort,
+    clearFilters,
+  };
+}
