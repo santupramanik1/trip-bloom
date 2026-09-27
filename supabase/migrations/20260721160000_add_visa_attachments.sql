@@ -1,4 +1,5 @@
--- Visa attachments
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public,extensions;-- Visa attachments
 
 CREATE TABLE IF NOT EXISTS visa_attachments (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

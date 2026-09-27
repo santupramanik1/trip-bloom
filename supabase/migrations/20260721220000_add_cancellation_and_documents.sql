@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public,extensions;
 -- Cancellation policy and required documents, per package.
 
 CREATE TABLE IF NOT EXISTS cancellation_policies (

@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public,extensions;
 CREATE TABLE IF NOT EXISTS itinerary_entries (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   itinerary_day_id UUID REFERENCES itinerary_days(id) ON DELETE CASCADE,

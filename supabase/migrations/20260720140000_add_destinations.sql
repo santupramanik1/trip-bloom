@@ -1,4 +1,6 @@
 -- Destinations
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public,extensions;
 
 CREATE TABLE destinations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),

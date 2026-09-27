@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SET search_path TO public,extensions;
 CREATE TABLE package_highlights (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   package_id UUID REFERENCES packages(id) ON DELETE CASCADE,
