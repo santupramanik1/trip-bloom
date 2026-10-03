@@ -170,7 +170,7 @@ function coverBlock(doc: Doc, cursor: Cursor, pkg: PackageFormInput, logo: strin
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
   doc.setTextColor(220, 235, 220);
-  doc.text('Travel Carvers · Explore Your Next Adventure', MARGIN, 78);
+  doc.text('TripBloom · Explore Your Next Adventure', MARGIN, 78);
 
   cursor.y = 128;
 }

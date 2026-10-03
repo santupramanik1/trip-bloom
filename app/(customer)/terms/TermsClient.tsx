@@ -23,7 +23,7 @@ const SECTIONS = [
     content: (
       <>
         <p className="mb-4">
-          Welcome to <strong>Travel Carvers</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). These Terms and Conditions govern your access to and use of our website, mobile application, and travel booking services.
+          Welcome to <strong>TripBloom</strong> (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). These Terms and Conditions govern your access to and use of our website, mobile application, and travel booking services.
         </p>
         <p>
           By accessing our platform or booking a package with us, you agree to comply with and be bound by these terms. If you do not agree with any part of these terms, please refrain from using our services.
@@ -53,10 +53,10 @@ const SECTIONS = [
     content: (
       <>
         <p>
-          All content on this website, including but not limited to text, graphics, logos, images, audio clips, digital downloads, and software, is the property of Travel Carvers or its content suppliers and is protected by international copyright and trademark laws.
+          All content on this website, including but not limited to text, graphics, logos, images, audio clips, digital downloads, and software, is the property of TripBloom or its content suppliers and is protected by international copyright and trademark laws.
         </p>
         <p className="mt-4">
-          You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information obtained from this website without prior written consent from Travel Carvers.
+          You may not modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative works from, transfer, or sell any information obtained from this website without prior written consent from TripBloom.
         </p>
       </>
     ),
@@ -85,7 +85,7 @@ const SECTIONS = [
     content: (
       <>
         <p>
-          During any tour booked through Travel Carvers, you are expected to behave appropriately and respectfully toward fellow travelers, guides, and locals. We reserve the right to decline, accept, or retain any person as a member of a tour if their conduct is deemed disruptive or endangers the safety of others. No refunds will be provided in such circumstances.
+          During any tour booked through TripBloom, you are expected to behave appropriately and respectfully toward fellow travelers, guides, and locals. We reserve the right to decline, accept, or retain any person as a member of a tour if their conduct is deemed disruptive or endangers the safety of others. No refunds will be provided in such circumstances.
         </p>
       </>
     ),
@@ -97,7 +97,7 @@ const SECTIONS = [
     content: (
       <>
         <p className="mb-4">
-          Travel Carvers acts strictly as an agent for third-party suppliers (e.g., airlines, hotels, transport operators). We are not liable for:
+          TripBloom acts strictly as an agent for third-party suppliers (e.g., airlines, hotels, transport operators). We are not liable for:
         </p>
         <ul className="list-disc pl-5 space-y-2 text-slate-700 mb-4">
           <li>Errors, omissions, or defaults of any third-party suppliers.</li>
@@ -149,7 +149,7 @@ const SECTIONS = [
           If you have any questions or concerns regarding these Terms and Conditions, please contact us:
         </p>
         <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-          <p className="font-medium text-slate-800">Travel Carvers</p>
+          <p className="font-medium text-slate-800">TripBloom</p>
           <p className="text-slate-600 mt-1">
             Please reach us through our{' '}
             <a href="/contact" className="text-brand-medium hover:underline">contact page</a>{' '}
@@ -217,7 +217,7 @@ export default function TermsAndConditionsPage() {
             Terms & Conditions
           </h1>
           <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base">
-            Please read these terms carefully before booking your journey with Travel Carvers. Last updated: July 2026.
+            Please read these terms carefully before booking your journey with TripBloom. Last updated: July 2026.
           </p>
         </div>
       </header>

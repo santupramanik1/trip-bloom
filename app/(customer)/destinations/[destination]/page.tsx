@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   if (!destination) {
     return createMetadata({
-      title: 'Destination Not Found | Travel Carvers',
+      title: 'Destination Not Found | TripBloom',
       description:
         'This destination could not be found. Explore our other tour packages instead.',
       path: `/destinations/${slug}`,
@@ -48,7 +48,7 @@ export async function generateMetadata({
     `Explore our ${destination.name} tour packages. ${SITE.defaultDescription}`;
 
   return createMetadata({
-    title: destination.meta_title ?? `${destination.name} Tour Packages | Travel Carvers`,
+    title: destination.meta_title ?? `${destination.name} Tour Packages | TripBloom`,
     description,
     path: `/destinations/${destination.slug}`,
     keywords: [
@@ -57,7 +57,7 @@ export async function generateMetadata({
       ...(destination.city ? [destination.city] : []),
       'tour packages',
       'holiday packages',
-      'Travel Carvers',
+      'TripBloom',
     ],
 
     images: [

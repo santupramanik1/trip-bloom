@@ -24,7 +24,7 @@ const SECTIONS = [
     content: (
       <>
         <p className="mb-4">
-          At <strong>Travel Carvers</strong>, we are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner.
+          At <strong>TripBloom</strong>, we are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner.
         </p>
         <p>
           This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you visit our website, use our mobile application, or book travel packages through our platform. Please read this policy carefully to understand our practices regarding your personal data.
@@ -172,8 +172,8 @@ const SECTIONS = [
           If you have questions or comments about this policy, or wish to exercise your data rights, you may contact our Data Protection Officer at:
         </p>
         <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-          <p className="font-medium text-slate-800">Travel Carvers Privacy Team</p>
-          <p className="text-slate-600 mt-1">Email: <a href="mailto:privacy@travelcarvers.com" className="text-brand-medium hover:underline">privacy@travelcarvers.com</a></p>
+          <p className="font-medium text-slate-800">TripBloom Privacy Team</p>
+          <p className="text-slate-600 mt-1">Email: <a href="mailto:privacy@tripbloom.com" className="text-brand-medium hover:underline">privacy@tripbloom.com</a></p>
           <p className="text-slate-600">Address: 123 Explorer Way, Wanderlust City, WL 45678</p>
         </div>
       </>
@@ -237,7 +237,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base">
-            How we collect, use, and protect your personal information at Travel Carvers. Last updated: July 2026.
+            How we collect, use, and protect your personal information at TripBloom. Last updated: July 2026.
           </p>
         </div>
       </header>

@@ -39,13 +39,13 @@ export default function AdminLoginPage() {
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <Image src="/logo.png" alt="Travel Carvers" width={64} height={64} className="h-16 w-16 rounded-full object-cover" priority />
+            <Image src="/logo.png" alt="TripBloom" width={64} height={64} className="h-16 w-16 rounded-full object-cover" priority />
           </div>
           <h1 className="text-3xl font-bold text-brand-darkest mb-2">
             Admin Login
           </h1>
           <p className="text-gray-600">
-            Travel Carvers Admin Panel
+            TripBloom Admin Panel
           </p>
         </div>
 

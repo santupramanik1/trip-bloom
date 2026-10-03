@@ -10,7 +10,7 @@ import { getActiveDestinationsWithCounts } from '@/lib/api/public/destinations';
 export const revalidate = 3600;
 
 export const metadata: Metadata = createMetadata({
-  title: 'Destinations | Travel Carvers',
+  title: 'Destinations | TripBloom',
   description: `Browse every destination we run trips to. ${SITE.defaultDescription}`,
   path: '/destinations',
 });

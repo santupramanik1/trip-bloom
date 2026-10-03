@@ -35,7 +35,7 @@ export const COMPANY = {
   tagline: 'Crafting unforgettable journeys across India and the world.',
   url: SITE.url,
   logoUrl: absoluteUrl('/logo.png'),
-  email: 'info@travelcarvers.com',
+  email: 'info@tripbloom.com',
   phone: '+91 98765 43210',
   phoneHref: 'tel:+919876543210',
   address: 'MG Road, Bengaluru, Karnataka 560001, India',
@@ -183,7 +183,7 @@ function footer(unsubscribeUrl?: string): string {
 
   const unsubscribe = unsubscribeUrl
     ? `<p style="margin:0 0 10px;font-family:${FONT_STACK};font-size:12px;line-height:1.5;color:${BRAND.mutedText};">
-         You are receiving this because you subscribed to Travel Carvers updates.
+         You are receiving this because you subscribed to TripBloom updates.
          <a href="${escapeHtml(unsubscribeUrl)}" target="_blank" style="color:${BRAND.forest};text-decoration:underline;">Unsubscribe</a>.
        </p>`
     : '';

@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 /**
  * Central SEO configuration + helpers.
  */
-const RAW_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://travelcarvers.com';
+const RAW_SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://tripbloom.com';
 
 export const SITE = {
-  name: 'Travel Carvers',
+  name: 'TripBloom',
   url: RAW_SITE_URL.replace(/\/+$/, ''),
-  defaultTitle: 'Travel Carvers | Best Domestic & International Tour Packages',
+  defaultTitle: 'TripBloom | Best Domestic & International Tour Packages',
   defaultDescription:
-    'Explore premium domestic and international tour packages with Travel Carvers. Discover Bali, Thailand, Vietnam, Europe, Kashmir and more.',
+    'Explore premium domestic and international tour packages with TripBloom. Discover Bali, Thailand, Vietnam, Europe, Kashmir and more.',
   defaultKeywords: [
     'travel',
     'travel packages',
@@ -18,10 +18,10 @@ export const SITE = {
     'international tours',
     'india tours',
     'honeymoon packages',
-    'Travel Carvers',
+    'TripBloom',
   ],
   defaultOgImage: '/images/og-default.jpg',
-  twitterHandle: '@travelcarvers',
+  twitterHandle: '@tripbloom',
   locale: 'en_IN',
 } as const;
 

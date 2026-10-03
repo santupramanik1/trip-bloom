@@ -61,14 +61,14 @@ export default function AdminNav({ isCollapsed, isMobileOpen, onCloseMobile }: A
               className="h-8 w-8 flex-shrink-0 rounded-full bg-white object-cover"
             />
             <div>
-              <h1 className="text-white text-base font-bold leading-tight">Travel Carvers</h1>
+              <h1 className="text-white text-base font-bold leading-tight">TripBloom</h1>
               <p className="text-white/60 text-[11px] leading-tight">Admin Panel</p>
             </div>
           </div>
           {isCollapsed && (
             <Image
               src="/logo.png"
-              alt="Travel Carvers"
+              alt="TripBloom"
               width={32}
               height={32}
               className="mx-auto hidden h-8 w-8 rounded-full bg-white object-cover lg:block"

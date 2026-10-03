@@ -5,9 +5,9 @@ import LoadingSkeleton from '@/components/ui/LoadingSkeleton';
 import PackagesView from './PackagesView';
 
 export const metadata: Metadata = createMetadata({
-  title: 'Tour Packages | Travel Carvers',
+  title: 'Tour Packages | TripBloom',
   description:
-    'Browse all Travel Carvers tour packages — domestic and international holidays, honeymoon trips and group tours. Filter by price, duration and category.',
+    'Browse all TripBloom tour packages — domestic and international holidays, honeymoon trips and group tours. Filter by price, duration and category.',
   path: '/packages',
   keywords: [
     'tour packages',
@@ -16,7 +16,7 @@ export const metadata: Metadata = createMetadata({
     'international tours',
     'india tours',
     'honeymoon packages',
-    'Travel Carvers',
+    'TripBloom',
   ],
 });
 

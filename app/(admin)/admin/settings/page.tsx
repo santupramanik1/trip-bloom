@@ -141,7 +141,7 @@ function SiteSettingsForm({ initial }: { initial: SiteSettings | null }) {
                 type="text"
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
-                placeholder="e.g. Travel Carvers"
+                placeholder="e.g. TripBloom"
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-brand-medium/50 text-gray-900 placeholder-gray-400"
                 required
               />

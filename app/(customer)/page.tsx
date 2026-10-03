@@ -7,9 +7,9 @@ import HomeView from './HomeView';
 export const revalidate = 3600;
 
 export const metadata: Metadata = createMetadata({
-  title: 'Travel Carvers | Best Domestic & International Tour Packages',
+  title: 'TripBloom | Best Domestic & International Tour Packages',
   description:
-    'Explore premium domestic and international tour packages with Travel Carvers. Discover Bali, Thailand, Vietnam, Europe, Kashmir and more.',
+    'Explore premium domestic and international tour packages with TripBloom. Discover Bali, Thailand, Vietnam, Europe, Kashmir and more.',
   path: '/',
 });
 

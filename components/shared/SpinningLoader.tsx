@@ -26,7 +26,7 @@ export default function SpinningLoader({ size = 80, className = '' }: SpinningLo
         >
           <Image
             src="/logo.png"
-            alt="Travel Carvers"
+            alt="TripBloom"
             width={size}
             height={size}
             className="w-full h-full object-cover rounded-full"

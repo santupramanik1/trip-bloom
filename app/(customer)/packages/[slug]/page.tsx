@@ -28,7 +28,7 @@ export async function generateMetadata({
 
   if (!pkg) {
     return createMetadata({
-      title: 'Package Not Found | Travel Carvers',
+      title: 'Package Not Found | TripBloom',
       description:
         'This travel package could not be found. Explore our other tour packages instead.',
       path: `/packages/${slug}`,
@@ -37,9 +37,9 @@ export async function generateMetadata({
   }
 
   const durationLabel = pkg.duration_days ? `${pkg.duration_days} Days` : '';
-  const title = `${[pkg.title, durationLabel].filter(Boolean).join(' ')} | Travel Carvers`;
+  const title = `${[pkg.title, durationLabel].filter(Boolean).join(' ')} | TripBloom`;
 
-  const keywords = [pkg.title, pkg.destination_name, 'travel', 'tour package', 'Travel Carvers'].filter(
+  const keywords = [pkg.title, pkg.destination_name, 'travel', 'tour package', 'TripBloom'].filter(
     (keyword): keyword is string => Boolean(keyword),
   );
 

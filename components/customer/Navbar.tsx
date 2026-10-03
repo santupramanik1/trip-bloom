@@ -71,13 +71,13 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0">
             <Image
               src="/logo.png"
-              alt="Travel Carvers"
+              alt="TripBloom"
               width={46}
               height={46}
               className="h-11 w-11 rounded-full object-cover border-2 border-white/50 shadow-md"
             />
             <div>
-              <span className="block text-lg font-black text-white tracking-wide drop-shadow-sm">Travel Carvers</span>
+              <span className="block text-lg font-black text-white tracking-wide drop-shadow-sm">TripBloom</span>
               <p className="text-[11px] text-white/90 font-medium drop-shadow-sm">Explore Your Next Adventure</p>
             </div>
           </Link>

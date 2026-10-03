@@ -225,16 +225,16 @@ export default function Footer() {
           {/* ---------------- Column 1: Company Info (4 Cols) ---------------- */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
             <div>
-              <Link href="/" className="mb-4 inline-flex items-center gap-3 group" aria-label="Travel Carvers home">
+              <Link href="/" className="mb-4 inline-flex items-center gap-3 group" aria-label="TripBloom home">
                 <Image
                   src="/logo.png"
-                  alt="Travel Carvers"
+                  alt="TripBloom"
                   width={48}
                   height={48}
                   className="h-12 w-12 rounded-full object-cover border-2 border-white/50 shadow-md group-hover:scale-105 transition-transform"
                 />
                 <div>
-                  <span className="text-xl font-black text-white tracking-wide">Travel Carvers</span>
+                  <span className="text-xl font-black text-white tracking-wide">TripBloom</span>
                   <p className="text-[11px] text-white/70 font-medium">Explore Your Next Adventure</p>
                 </div>
               </Link>
@@ -334,7 +334,7 @@ export default function Footer() {
       <div className="border-t border-white/10 bg-brand-footer-deep">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 sm:px-6 lg:px-8 py-6 text-xs text-white/70 sm:flex-row sm:justify-between font-medium">
           <p>
-            &copy; {currentYear} Travel Carvers. All Rights Reserved. Crafted with care for global explorers.
+            &copy; {currentYear} TripBloom. All Rights Reserved. Crafted with care for global explorers.
           </p>
           <p className="text-white/60">
             Powered by{' '}

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
   if (!pair) {
     return createMetadata({
-      title: 'Category Not Found | Travel Carvers',
+      title: 'Category Not Found | TripBloom',
       description: 'This travel category could not be found. Explore our other tour packages instead.',
       path: `/categories/${slug}/${subslug}`,
       noIndex: true,
@@ -51,12 +51,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { category, subcategory } = pair;
 
   return createMetadata({
-    title: `${subcategory.name} ${category.name} Packages | Travel Carvers`,
+    title: `${subcategory.name} ${category.name} Packages | TripBloom`,
     description:
       subcategory.description ??
       `Explore our ${subcategory.name} ${category.name} tour packages. ${SITE.defaultDescription}`,
     path: `/categories/${slug}/${subslug}`,
-    keywords: [subcategory.name, category.name, 'tour packages', 'holiday packages', 'Travel Carvers'],
+    keywords: [subcategory.name, category.name, 'tour packages', 'holiday packages', 'TripBloom'],
     images: [category.cover_image_url ?? absoluteUrl(SITE.defaultOgImage)],
   });
 }

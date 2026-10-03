@@ -10,10 +10,10 @@ import { getVisaCountries } from '@/lib/api/public/visa';
 export const revalidate = 3600;
 
 export const metadata: Metadata = createMetadata({
-  title: 'Visa Information | Travel Carvers',
+  title: 'Visa Information | TripBloom',
   description: `Visa requirements and document checklists for every country we travel to. ${SITE.defaultDescription}`,
   path: '/visa',
-  keywords: ['visa', 'visa requirements', 'travel documents', 'visa checklist', 'Travel Carvers'],
+  keywords: ['visa', 'visa requirements', 'travel documents', 'visa checklist', 'TripBloom'],
 });
 
 export default async function VisaPage() {

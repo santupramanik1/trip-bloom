@@ -341,7 +341,7 @@ export default function Home({ sections }: { sections: HomepageSectionsContent |
       <section className="py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <SectionHeading
-            eyebrow="Why Travel Carvers"
+            eyebrow="Why TripBloom"
             title="Trusted by Thousands"
             subtitle="A decade of crafting journeys travellers remember for a lifetime."
             align="center"

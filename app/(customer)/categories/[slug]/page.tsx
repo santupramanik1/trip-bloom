@@ -32,7 +32,7 @@ export async function generateMetadata({
 
   if (!category) {
     return createMetadata({
-      title: 'Category Not Found | Travel Carvers',
+      title: 'Category Not Found | TripBloom',
       description: 'This travel category could not be found. Explore our other tour packages instead.',
       path: `/categories/${slug}`,
       noIndex: true,
@@ -40,12 +40,12 @@ export async function generateMetadata({
   }
 
   return createMetadata({
-    title: `${category.name} Tour Packages | Travel Carvers`,
+    title: `${category.name} Tour Packages | TripBloom`,
     description:
       category.description ??
       `Explore our ${category.name} tour packages. ${SITE.defaultDescription}`,
     path: `/categories/${slug}`,
-    keywords: [category.name, 'tour packages', 'holiday packages', 'Travel Carvers'],
+    keywords: [category.name, 'tour packages', 'holiday packages', 'TripBloom'],
     images: [category.cover_image_url ?? absoluteUrl(SITE.defaultOgImage)],
   });
 }

@@ -141,7 +141,7 @@ function Icon({ name }: { name: keyof typeof icons }) {
    Content
    ======================================== */
 const milestones = [
-    { year: '2015', title: 'The first trail is carved', body: 'Travel Carvers begins as three friends hand-building itineraries for travelers who wanted routes with a story, not a checklist.' },
+    { year: '2015', title: 'The first trail is carved', body: 'TripBloom begins as three friends hand-building itineraries for travelers who wanted routes with a story, not a checklist.' },
     { year: '2018', title: 'Twenty-five countries in', body: 'A growing bench of local guides lets us move from a handful of regions to a full network across four continents.' },
     { year: '2021', title: 'The sustainability pledge', body: 'We commit every itinerary to a carbon-conscious standard and start reinvesting in the communities we route through.' },
     { year: '2026', title: 'Fifty countries, one philosophy', body: 'Same hand-carved approach, a much bigger map — every trip still starts with a person, not a template.' },
@@ -188,7 +188,7 @@ export default function AboutPage() {
 
                 <div className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col items-start justify-center px-6 py-28 sm:px-10">
                     <span className="font-[family-name:var(--font-mono)] text-xs tracking-[0.35em] text-white/70 uppercase">
-                        Travel Carvers &mdash; About Us
+                        TripBloom &mdash; About Us
                     </span>
 
                     <h1 className="mt-6 max-w-3xl font-[family-name:var(--font-display)] text-5xl leading-[1.05] font-semibold sm:text-6xl md:text-7xl">
@@ -244,7 +244,7 @@ export default function AboutPage() {
                         <div className="scroll-animate lg:col-span-7 lg:pt-8 opacity-0 translate-y-6" style={{ transitionDelay: '70ms' }}>
                             <div className="relative pl-6 border-l-2 border-brand-light">
                                 <p className="text-lg md:text-xl text-brand-dark/80 leading-relaxed">
-                                    Travel Carvers started with a simple complaint: most itineraries
+                                    TripBloom started with a simple complaint: most itineraries
                                     feel cut from the same template. So we built a studio of local
                                     guides and route planners who shape every trip by hand &mdash;
                                     carving out the detours, the local kitchens, and the trails that
@@ -316,7 +316,7 @@ export default function AboutPage() {
                 <div className="mx-auto max-w-6xl px-6 sm:px-10">
                     <div className="scroll-animate max-w-2xl opacity-0 translate-y-6">
                         <span className="font-[family-name:var(--font-mono)] text-xs tracking-[0.35em] text-brand-medium uppercase">
-                            Why Travel Carvers
+                            Why TripBloom
                         </span>
                         <h2 className="mt-4 font-[family-name:var(--font-display)] text-3xl font-medium text-brand-darkest sm:text-4xl">
                             Six reasons travelers keep coming back

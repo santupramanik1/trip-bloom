@@ -167,7 +167,7 @@ export default function ContactPage() {
 
     // Admin-managed contact details (Admin → Settings), the single source of truth.
     const { data: siteSettings } = usePublicSiteSettings();
-    const companyName = siteSettings?.company_name || "Travel Carvers";
+    const companyName = siteSettings?.company_name || "TripBloom";
     const phoneDisplay = siteSettings?.contact_phone ?? "";
     const phoneTel = phoneDisplay.replace(/[^\d+]/g, "");
     const email = siteSettings?.contact_email ?? "";
@@ -370,7 +370,7 @@ export default function ContactPage() {
                                         Message sent
                                     </h2>
                                     <p className="mt-2 max-w-sm text-secondary">
-                                        Thanks for reaching out. A Travel Carvers specialist
+                                        Thanks for reaching out. A TripBloom specialist
                                         will reply to your email within one business day.
                                     </p>
                                     <button
@@ -563,7 +563,7 @@ export default function ContactPage() {
                 </h2>
                 <div className="overflow-hidden rounded-2xl border border-brand-light/40 shadow-md shadow-brand-dark/5">
                     <iframe
-                        title="Travel Carvers HQ location"
+                        title="TripBloom HQ location"
                         src={`https://www.openstreetmap.org/export/embed.html?bbox=${MAP_BBOX}&layer=mapnik&marker=${MAP_MARKER}`}
                         className="w-full h-[360px] sm:h-[420px] border-0"
                         loading="lazy"
