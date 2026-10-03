@@ -1,17 +1,17 @@
-# 🌍 Travel Carvers - Interactive Travel Website
+# 🌍 TripBloom - Interactive Travel Website
 
 > **Premium Tour Operator Website** with Split-Screen Hero, Interactive World Map, and Secure Admin Panel
 
 A modern, full-stack travel website featuring a beautiful split-screen hero section with an auto-rotating carousel and interactive world map, complete package showcase, and a secure admin panel for managing your travel business.
 
-![Travel Carvers](public/logo.png)
+![TripBloom](public/logo.png)
 
 ## ⚡ Quick Start (5 Minutes)
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/wnr-group/travel-carvers.git
-cd travel-carvers
+git clone https://github.com/santupramanik1/trip-bloom.git
+cd trip-bloom
 
 # 2. Install dependencies
 npm install
@@ -38,7 +38,7 @@ npm run dev
 - 🗄️ Supabase Studio: http://localhost:54323
 
 **Default Admin Credentials:**
-- Email: `admin@travelcarvers.in`
+- Email: `admin@tripbloom.in`
 - Password: `Admin@123`
 
 ---
@@ -158,8 +158,8 @@ docker --version # Should be installed
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/wnr-group/travel-carvers.git
-cd travel-carvers
+git clone https://github.com/santupramanik1/trip-bloom.git
+cd trip-bloom
 ```
 
 ### Step 2: Install Dependencies
@@ -190,7 +190,7 @@ cp .env.example .env.local
 
 ### Start Supabase Locally
 
-Travel Carvers uses Supabase for database and authentication. Start it locally with Docker:
+TripBloom uses Supabase for database and authentication. Start it locally with Docker:
 
 ```bash
 npm run supabase:start
@@ -225,12 +225,12 @@ SUPABASE_SERVICE_ROLE_KEY=<paste-your-service-role-key-here>
 
 # Application Configuration
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_COMPANY_NAME="Travel Carvers"
+NEXT_PUBLIC_COMPANY_NAME="TripBloom"
 
 # Contact Configuration (Update with your details)
 NEXT_PUBLIC_WHATSAPP_NUMBER=+919876543210
 NEXT_PUBLIC_PHONE_NUMBER=+919876543210
-NEXT_PUBLIC_EMAIL=info@travelcarvers.in
+NEXT_PUBLIC_EMAIL=info@tripbloom.in
 
 # Session Configuration
 SESSION_SECRET=your-random-32-character-secret-key-here
@@ -255,7 +255,7 @@ npm run seed:admin
 ```
 
 This creates an admin user with:
-- **Email**: `admin@travelcarvers.in`
+- **Email**: `admin@tripbloom.in`
 - **Password**: `Admin@123`
 
 **⚠️ IMPORTANT**: Change this password in production!
@@ -268,7 +268,7 @@ If the seed script fails, manually create an admin user:
 2. Go to **Authentication** → **Users**
 3. Click **Add user** → **Create new user**
 4. Fill in:
-   - Email: `admin@travelcarvers.in`
+   - Email: `admin@tripbloom.in`
    - Password: `Admin@123`
    - Email confirmed: ✅ Checked
 5. Click **Create user**
@@ -284,7 +284,7 @@ Use the credentials above to sign in.
 ## 📁 Project Structure
 
 ```
-travel-carvers/
+trip-bloom/
 ├── app/
 │   ├── (admin)/              # Protected admin routes
 │   │   ├── layout.tsx        # Admin layout wrapper
@@ -344,7 +344,7 @@ travel-carvers/
 │   └── seed-admin.ts         # Admin user seeding script
 │
 ├── public/
-│   ├── logo.png              # Travel Carvers logo
+│   ├── logo.png              # TripBloom logo
 │   └── earth.jpg             # Earth texture for globe
 │
 ├── .env.example              # Environment template
@@ -615,16 +615,16 @@ This is a private project. For contribution guidelines, please contact the team.
 
 ## 📄 License
 
-Private & Confidential - © 2026 Travel Carvers
+Private & Confidential - © 2026 TripBloom
 
 ---
 
 ## 📞 Support
 
 For issues or questions:
-- 📧 Email: info@travelcarvers.in
+- 📧 Email: info@tripbloom.in
 - 📱 WhatsApp: +91 98765 43210
-- 🐛 Issues: [GitHub Issues](https://github.com/wnr-group/travel-carvers/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/santupramanik1/trip-bloom/issues)
 
 ---
 
@@ -639,6 +639,6 @@ For issues or questions:
 
 ---
 
-**Built with ❤️ by the Travel Carvers Team**
+**Built with ❤️ by the TripBloom Team**
 
 🌍 Explore the world, one destination at a time.
