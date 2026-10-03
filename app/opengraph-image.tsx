@@ -35,7 +35,7 @@ export default async function OpengraphImage() {
           padding: '80px',
           background: `linear-gradient(135deg, ${FOREST_DARK} 0%, ${FOREST} 100%)`,
           color: '#ffffff',
-          fontFamily: 'sans-serif',
+          fontFamily: '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif',
         }}
       >
         <div

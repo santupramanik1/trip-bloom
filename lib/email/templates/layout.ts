@@ -48,7 +48,7 @@ export const COMPANY = {
   ],
 } as const;
 
-const FONT_STACK = 'Arial, Helvetica, sans-serif';
+const FONT_STACK = "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
 export function escapeHtml(value: unknown): string {
   if (value === null || value === undefined) return '';
