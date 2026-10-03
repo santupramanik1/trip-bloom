@@ -1,5 +1,5 @@
 /**
- * New-lead notification (sent to the Travel Carvers admin/sales inbox).
+ * New-lead notification (sent to the TripBloom admin/sales inbox).
  */
 
 import {

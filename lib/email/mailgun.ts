@@ -21,7 +21,7 @@ interface EmailOptions {
 export async function sendEmail({ to, subject, html, text }: EmailOptions) {
   const apiKey = process.env.MAILGUN_API_KEY;
   const domain = process.env.MAILGUN_DOMAIN;
-  const from = process.env.MAILGUN_FROM_EMAIL || `Travel Carvers <noreply@${domain}>`;
+  const from = process.env.MAILGUN_FROM_EMAIL || `TripBloom <noreply@${domain}>`;
 
   if (!apiKey || !domain) {
     console.error('Mailgun not configured. Add MAILGUN_API_KEY and MAILGUN_DOMAIN to .env.local');
@@ -97,19 +97,19 @@ ${lead.message ? `Message: ${lead.message}` : ''}
   leadConfirmation: (name: string, packageTitle: string) => ({
     subject: `Thank you for your interest in ${packageTitle}`,
     html: `
-      <h2>Thank You for Contacting Travel Carvers!</h2>
+      <h2>Thank You for Contacting TripBloom!</h2>
       <p>Dear ${name},</p>
       <p>We've received your inquiry about <strong>${packageTitle}</strong>.</p>
       <p>Our team will get back to you within 24 hours with more details and to discuss your travel plans.</p>
       <br>
-      <p>Best regards,<br>Travel Carvers Team</p>
+      <p>Best regards,<br>TripBloom Team</p>
       <hr>
       <p style="color: #666; font-size: 12px;">
         This is an automated confirmation. Please do not reply to this email.
       </p>
     `,
     text: `
-Thank You for Contacting Travel Carvers!
+Thank You for Contacting TripBloom!
 
 Dear ${name},
 
@@ -118,7 +118,7 @@ We've received your inquiry about ${packageTitle}.
 Our team will get back to you within 24 hours with more details and to discuss your travel plans.
 
 Best regards,
-Travel Carvers Team
+TripBloom Team
     `,
   }),
 };

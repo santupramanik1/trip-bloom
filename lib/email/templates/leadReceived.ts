@@ -72,7 +72,7 @@ export function leadReceivedEmail(data: LeadReceivedData): EmailContent {
         COMPANY.email,
       )}</a> (${escapeHtml(COMPANY.workingHours)}).`,
     )}
-    ${paragraph('Warm regards,<br />The Travel Carvers Team')}
+    ${paragraph('Warm regards,<br />The TripBloom Team')}
   `;
 
   const html = renderLayout({
@@ -98,12 +98,12 @@ export function leadReceivedEmail(data: LeadReceivedData): EmailContent {
     `Need us sooner? Call ${COMPANY.phone} or email ${COMPANY.email} (${COMPANY.workingHours}).`,
     '',
     'Warm regards,',
-    'The Travel Carvers Team',
+    'The TripBloom Team',
     `© ${new Date().getFullYear()} ${COMPANY.name}. All Rights Reserved.`,
   ].join('\n');
 
   return {
-    subject: 'We’ve received your enquiry — Travel Carvers',
+    subject: 'We’ve received your enquiry — TripBloom',
     html,
     text,
   };

@@ -1,5 +1,5 @@
 /**
- * Seed Initial Data for Travel Carvers
+ * Seed Initial Data for TripBloom
  * Run with: npx tsx scripts/seed-initial.ts
  */
 
@@ -62,7 +62,7 @@ async function seed() {
   // 3. Homepage Sections
   console.log('\nCreating homepage sections...');
   const homepageData = {
-    hero_title: 'Explore the World with Travel Carvers',
+    hero_title: 'Explore the World with TripBloom',
     hero_subtitle: 'Discover amazing destinations and create unforgettable memories',
     hero_cta_text: 'Browse Packages',
     featured_title: 'Featured Destinations',
@@ -103,7 +103,7 @@ async function seed() {
   // 5. Site Settings
   console.log('\nCreating site settings...');
   const siteSettings = {
-    company_name: 'Travel Carvers',
+    company_name: 'TripBloom',
     contact_email: 'info@travelcarvers.com',
     contact_phone: '+919876543210',
     address: '123 Travel Street, Adventure City, India',
@@ -130,17 +130,17 @@ async function seed() {
     {
       page_key: 'about',
       title: 'About Us',
-      content: '<h1>About Travel Carvers</h1><p>We are passionate about creating unforgettable travel experiences...</p>',
-      meta_title: 'About Us - Travel Carvers',
-      meta_description: 'Learn more about Travel Carvers and our mission to create amazing travel experiences',
+      content: '<h1>About TripBloom</h1><p>We are passionate about creating unforgettable travel experiences...</p>',
+      meta_title: 'About Us - TripBloom',
+      meta_description: 'Learn more about TripBloom and our mission to create amazing travel experiences',
       is_active: true,
     },
     {
       page_key: 'contact',
       title: 'Contact Us',
       content: '<h1>Contact Us</h1><p>Get in touch with our travel experts...</p>',
-      meta_title: 'Contact Us - Travel Carvers',
-      meta_description: 'Contact Travel Carvers for inquiries and bookings',
+      meta_title: 'Contact Us - TripBloom',
+      meta_description: 'Contact TripBloom for inquiries and bookings',
       is_active: true,
     },
   ];
