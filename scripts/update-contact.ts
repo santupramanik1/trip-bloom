@@ -43,6 +43,8 @@ async function updateContactSettings() {
   console.log('🔄 Updating contact settings in Supabase...');
 
   const newSettings = {
+    company_name: 'TripBloom',
+    contact_email: 'santu700141@gmail.com',
     contact_phone: '+91 9832487454',
     address: 'Bengaluru, Karnataka 560024',
     linkedin_url: 'https://www.linkedin.com/in/santu-pramanik/',
@@ -62,8 +64,6 @@ async function updateContactSettings() {
     console.log('✅ Updated existing site_settings record in Supabase.');
   } else {
     const { error } = await supabase.from('site_settings').insert({
-      company_name: 'TripBloom',
-      contact_email: 'santu700141@gmail.com',
       show_prices_globally: true,
       ...newSettings,
     });
