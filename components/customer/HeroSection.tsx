@@ -27,24 +27,24 @@ function splitHeadline(title: string): { lead: string; accent: string } {
 
 const heroImages = [
   {
-    url: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600&q=80',
-    title: 'Majestic Mountain Peaks',
-    subtitle: 'Conquer scenic trails and alpine hideaways',
+    url: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1920&q=90&auto=format&fit=crop',
+    title: 'Kerala Backwaters, India',
+    subtitle: 'Glide through emerald waterways on a traditional houseboat',
   },
   {
-    url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80',
-    title: 'Untouched Coastal Havens',
-    subtitle: 'Discover crystal waters and golden island sunsets',
+    url: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1920&q=90&auto=format&fit=crop',
+    title: 'Majestic Himalayas',
+    subtitle: 'Conquer breathtaking peaks and serene alpine meadows',
   },
   {
-    url: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600&q=80',
-    title: 'Vibrant Global Capitals',
-    subtitle: 'Immerse yourself in architecture, art, and culture',
+    url: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&q=90&auto=format&fit=crop',
+    title: 'Royal Rajasthan',
+    subtitle: 'Explore golden forts, vibrant bazaars and desert sunsets',
   },
   {
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80',
-    title: 'Serene Desert Horizons',
-    subtitle: 'Journey through breathtaking dunes and starlit nights',
+    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=90&auto=format&fit=crop',
+    title: 'Pristine Maldives',
+    subtitle: 'Dive into crystal-blue lagoons and overwater paradise',
   },
 ];
 
