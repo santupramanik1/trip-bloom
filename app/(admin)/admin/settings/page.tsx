@@ -155,7 +155,7 @@ function SiteSettingsForm({ initial }: { initial: SiteSettings | null }) {
                 type="email"
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
-                placeholder="e.g. info@travelcarvers.com"
+                placeholder="e.g. santu700141@gmail.com"
                 className="w-full px-3 py-2 border border-gray-200 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-brand-medium/50 text-gray-900 placeholder-gray-400"
                 required
               />
