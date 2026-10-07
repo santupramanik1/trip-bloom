@@ -125,10 +125,7 @@ const OFFICE_HOURS = [
 ];
 
 const SOCIAL_LINKS = [
-    { label: "Facebook", href: "https://facebook.com/travelcarvers", Icon: FacebookIcon },
-    { label: "Instagram", href: "https://instagram.com/travelcarvers", Icon: InstagramIcon },
-    { label: "Twitter", href: "https://twitter.com/travelcarvers", Icon: TwitterIcon },
-    { label: "LinkedIn", href: "https://linkedin.com/company/travelcarvers", Icon: LinkedinIcon },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/santu-pramanik/", Icon: LinkedinIcon },
 ];
 
 function validate(data: FormData): FormErrors {
@@ -168,10 +165,10 @@ export default function ContactPage() {
     // Admin-managed contact details (Admin → Settings), the single source of truth.
     const { data: siteSettings } = usePublicSiteSettings();
     const companyName = siteSettings?.company_name || "TripBloom";
-    const phoneDisplay = siteSettings?.contact_phone ?? "";
+    const phoneDisplay = siteSettings?.contact_phone || "+91 9832487454";
     const phoneTel = phoneDisplay.replace(/[^\d+]/g, "");
-    const email = siteSettings?.contact_email ?? "";
-    const address = siteSettings?.address ?? "";
+    const email = siteSettings?.contact_email || "info@travelcarvers.in";
+    const address = siteSettings?.address || "Bengaluru, Karnataka 560024";
 
     const slides = [
         {
@@ -506,6 +503,17 @@ export default function ContactPage() {
                                     </a>
                                 </InfoStop>
                             )}
+
+                            <InfoStop icon={Phone} title="WhatsApp us">
+                                <a
+                                    href={`https://wa.me/919832487454?text=${encodeURIComponent("Hi, I'm interested in your travel packages.")}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-brand-dark font-medium hover:underline underline-offset-4"
+                                >
+                                    +91 9832487454 (Chat on WhatsApp)
+                                </a>
+                            </InfoStop>
 
                             {email && (
                                 <InfoStop icon={Mail} title="Email us">

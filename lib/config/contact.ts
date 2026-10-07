@@ -7,15 +7,20 @@
 
 /** wa.me wants digits only: no `+`, spaces, dashes or parentheses. */
 function toWhatsAppDigits(raw: string): string {
-  return raw.replace(/\D/g, '');
+  const digits = raw.replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.length === 10 && /^[6-9]/.test(digits)) {
+    return `91${digits}`;
+  }
+  return digits;
 }
 
-const RAW_WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '';
+const RAW_WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+919832487454';
 
 export const CONTACT = {
   /** Digits-only WhatsApp number, or '' when unconfigured (the button then hides). */
   whatsAppNumber: toWhatsAppDigits(RAW_WHATSAPP_NUMBER),
-  phoneNumber: process.env.NEXT_PUBLIC_PHONE_NUMBER ?? '',
+  phoneNumber: process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 9832487454',
 } as const;
 
 export const WHATSAPP_MESSAGES = {

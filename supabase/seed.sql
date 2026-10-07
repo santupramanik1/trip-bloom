@@ -37,7 +37,7 @@ INSERT INTO trust_badges (text, icon, display_order) VALUES
 
 -- Site Settings
 INSERT INTO site_settings (company_name, contact_email, contact_phone, address, show_prices_globally, facebook_url, instagram_url, twitter_url, linkedin_url) VALUES
-  ('Travel Carvers', 'info@travelcarvers.com', '+919876543210', '123 Travel Street, Adventure City, India', true, 'https://facebook.com/travelcarvers', 'https://instagram.com/travelcarvers', 'https://twitter.com/travelcarvers', 'https://linkedin.com/company/travelcarvers');
+  ('TripBloom', 'info@travelcarvers.in', '+91 9832487454', 'Bengaluru, Karnataka 560024', true, '', '', '', 'https://www.linkedin.com/in/santu-pramanik/');
 
 -- Static Pages
 INSERT INTO static_pages (page_key, title, content, meta_title, meta_description, is_active) VALUES

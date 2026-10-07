@@ -104,14 +104,14 @@ async function seed() {
   console.log('\nCreating site settings...');
   const siteSettings = {
     company_name: 'TripBloom',
-    contact_email: 'info@travelcarvers.com',
-    contact_phone: '+919876543210',
-    address: '123 Travel Street, Adventure City, India',
+    contact_email: 'info@travelcarvers.in',
+    contact_phone: '+91 9832487454',
+    address: 'Bengaluru, Karnataka 560024',
     show_prices_globally: true,
-    facebook_url: 'https://facebook.com/travelcarvers',
-    instagram_url: 'https://instagram.com/travelcarvers',
-    twitter_url: 'https://twitter.com/travelcarvers',
-    linkedin_url: 'https://linkedin.com/company/travelcarvers',
+    facebook_url: '',
+    instagram_url: '',
+    twitter_url: '',
+    linkedin_url: 'https://www.linkedin.com/in/santu-pramanik/',
   };
 
   const { error: settingsError } = await supabase
