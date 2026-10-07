@@ -154,7 +154,7 @@ export default function Footer() {
   ];
 
   const addressValue = siteSettings?.address || 'Bengaluru, Karnataka 560024';
-  const emailValue = siteSettings?.contact_email || 'info@travelcarvers.in';
+  const emailValue = siteSettings?.contact_email || 'santu700141@gmail.com';
 
   const contactDetails: ContactItem[] = [
     {

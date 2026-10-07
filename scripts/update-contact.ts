@@ -63,7 +63,7 @@ async function updateContactSettings() {
   } else {
     const { error } = await supabase.from('site_settings').insert({
       company_name: 'TripBloom',
-      contact_email: 'info@travelcarvers.in',
+      contact_email: 'santu700141@gmail.com',
       show_prices_globally: true,
       ...newSettings,
     });

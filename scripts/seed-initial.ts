@@ -104,7 +104,7 @@ async function seed() {
   console.log('\nCreating site settings...');
   const siteSettings = {
     company_name: 'TripBloom',
-    contact_email: 'info@travelcarvers.in',
+    contact_email: 'santu700141@gmail.com',
     contact_phone: '+91 9832487454',
     address: 'Bengaluru, Karnataka 560024',
     show_prices_globally: true,

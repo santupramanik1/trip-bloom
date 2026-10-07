@@ -167,7 +167,7 @@ export default function ContactPage() {
     const companyName = siteSettings?.company_name || "TripBloom";
     const phoneDisplay = siteSettings?.contact_phone || "+91 9832487454";
     const phoneTel = phoneDisplay.replace(/[^\d+]/g, "");
-    const email = siteSettings?.contact_email || "info@travelcarvers.in";
+    const email = siteSettings?.contact_email || "santu700141@gmail.com";
     const address = siteSettings?.address || "Bengaluru, Karnataka 560024";
 
     const slides = [
