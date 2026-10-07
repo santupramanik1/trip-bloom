@@ -3,7 +3,7 @@
 import { useState, type ComponentType, type SVGProps } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Mail, MapPin, Clock } from 'lucide-react';
 import { usePublicSiteSettings } from '@/lib/hooks/useSiteSettings';
 import { useNavCategories } from '@/lib/hooks/useNavCategories';
 import { useCategories } from '@/lib/hooks/useCategories';
@@ -153,17 +153,10 @@ export default function Footer() {
     },
   ];
 
-  const phoneValue = siteSettings?.contact_phone || '+91 9832487454';
   const addressValue = siteSettings?.address || 'Bengaluru, Karnataka 560024';
   const emailValue = siteSettings?.contact_email || 'info@travelcarvers.in';
 
   const contactDetails: ContactItem[] = [
-    {
-      Icon: Phone,
-      label: 'Phone',
-      value: phoneValue,
-      href: `tel:${phoneValue.replace(/[^\d+]/g, '')}`,
-    },
     {
       Icon: WhatsAppIcon,
       label: 'WhatsApp',
